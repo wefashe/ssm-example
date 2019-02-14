@@ -1,0 +1,40 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    
+spring:
+  datasource:
+    druid:
+      driver-class-name: net.sf.log4jdbc.DriverSpy
+      url: jdbc:log4jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8
+#      driver-class-name: com.mysql.cj.jdbc.Driver 
+#      url: jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8
+      username: root
+      password: root
+      test-while-idle: false
+  devtools:
+    restart:
+      additional-paths: src/main/java
+  thymeleaf:
+    cache: false
+  mvc:
+    #出现错误时, 直接抛出异常
+    throw-exception-if-no-handler-found: true
+  resources:
+    #关闭工程中的资源文件建立映射
+    add-mappings: false
+  output:
+    ansi:
+      enabled: 
+        
+   
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.demo.entity
+  type-enums-package: com.example.demo.util.enums 
+  global-config:
+    db-config:
+      id-type: uuid
+    banner: false

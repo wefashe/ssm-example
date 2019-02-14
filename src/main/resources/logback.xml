@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+	<include
+		resource="org/springframework/boot/logging/logback/base.xml" />
+
+	<logger name="jdbc" additivity="false" level="OFF" />
+	<logger name="jdbc.sqlonly" additivity="false" level="INFO">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+
+</configuration>
