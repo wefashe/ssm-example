@@ -61,7 +61,7 @@ public class ShiroRealm extends AuthorizingRealm {
     log.info("{}登录认证通过", authcToken.getPrincipal());
 
     //盐值  一般是用户名
-    ByteSource credentialsSalt = ByteSource.Util.bytes(user.getUserId());
+    ByteSource credentialsSalt = ByteSource.Util.bytes(user.getPassSalt());
     return new SimpleAuthenticationInfo(user, user.getUserPass(), credentialsSalt, getName());
   }
 

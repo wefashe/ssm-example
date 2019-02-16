@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
@@ -13,8 +14,9 @@ import org.springframework.stereotype.Controller;
  * @author wenfs
  * @since 2019-02-13
  */
+@Api("日志接口")
 @Controller
-@RequestMapping("/sysLog")
+@RequestMapping("log")
 public class SysLogController {
 
 }

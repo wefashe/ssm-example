@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.demo.entity.SysUser;
 import com.example.demo.service.ISysUserService;
 import com.example.demo.util.result.Result;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author wenfs
  * @since 2019-02-13
  */
+@Api(tags="用户接口")
 @Controller
-@RequestMapping("sysUser")
+@RequestMapping("user")
 public class SysUserController {
 
 	@Autowired
@@ -31,7 +34,8 @@ public class SysUserController {
 	public String register() {
 		return null;
 	}
-	
+
+	@ApiOperation(value="添加用户value")
 	@PostMapping("register")
 	public Result register( SysUser user) {
 
