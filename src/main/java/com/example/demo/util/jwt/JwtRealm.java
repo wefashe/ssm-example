@@ -1,6 +1,5 @@
-package com.example.demo.util.shiro;
+package com.example.demo.util.jwt;
 
-import com.baomidou.kaptcha.Kaptcha;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.demo.dao.ISysPermDao;
 import com.example.demo.dao.ISysRoleDao;
@@ -10,14 +9,11 @@ import com.example.demo.entity.SysRole;
 import com.example.demo.entity.SysUser;
 import com.example.demo.util.enums.UsageStatus;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.SimplePrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -25,24 +21,37 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class ShiroRealm extends AuthorizingRealm {
+public class JwtRealm extends AuthorizingRealm {
 
-  @Autowired
-  ISysUserDao userDao;
+  @Autowired ISysUserDao userDao;
 
-  @Autowired
-  ISysPermDao permDao;
+  @Autowired ISysPermDao permDao;
 
-  @Autowired
-  ISysRoleDao roleDao;
+  @Autowired ISysRoleDao roleDao;
 
   /**
-   *  shiro登录认证
+   * 必须重写此方法，不然shiro会报错
+   * 使用JWT替代原生Token
+   * @param token
+   * @return
+   */
+  @Override
+  public boolean supports(AuthenticationToken token) {
+    return token instanceof JwtToken;
+  }
+
+  /**
+   * 默认使用此方法进行用户名正确与否验证，错误抛出异常即可
+   *
+   * @param authcToken
+   * @return
+   * @throws AuthenticationException
    */
   @Override
   protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
-    // 获取用户输入信息
-    String userName = (String) authcToken.getPrincipal();
+
+    String token = (String) authcToken.getPrincipal();
+    String userName = JwtUtil.getUserName(token);
 
     log.info("{}开始登录认证", authcToken.getPrincipal());
     LambdaQueryWrapper<SysUser> lambda = new LambdaQueryWrapper<>();
@@ -60,16 +69,18 @@ public class ShiroRealm extends AuthorizingRealm {
     userDao.updateById(new SysUser().setUserId(user.getUserId()).setLastLoginTime(System.currentTimeMillis() + ""));
     log.info("{}登录认证通过", authcToken.getPrincipal());
 
-    //盐值  一般是用户名
-    ByteSource credentialsSalt = ByteSource.Util.bytes(user.getUserId());
-    return new SimpleAuthenticationInfo(user, user.getUserPass(), credentialsSalt, getName());
+    return new SimpleAuthenticationInfo(user, token, getName());
   }
 
-  /** 
-    * shiro权限认证
-    */
+  /**
+   * 只有当需要检测用户权限的时候才会调用此方法
+   *
+   * @param principals
+   * @return
+   */
   @Override
   protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+
     SysUser user = (SysUser) principals.getPrimaryPrincipal();
     SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
     // 获取用户角色集
@@ -84,23 +95,4 @@ public class ShiroRealm extends AuthorizingRealm {
     simpleAuthorizationInfo.setStringPermissions(permSet);
     return simpleAuthorizationInfo;
   }
-
-  /**
-   * 指定principalCollection 清除
-   */
-  @Override
-  public void clearCachedAuthorizationInfo(PrincipalCollection principalCollection) {
-    SimplePrincipalCollection principals = new SimplePrincipalCollection(principalCollection, getName());
-    super.clearCachedAuthorizationInfo(principals);
-  }
-
-  /**
-   * 清空当前用户权限信息
-   */
-  public void clearCachedAuthorizationInfo() {
-    PrincipalCollection principalCollection = SecurityUtils.getSubject().getPrincipals();
-    SimplePrincipalCollection principals = new SimplePrincipalCollection(principalCollection, getName());
-    super.clearCachedAuthorizationInfo(principals);
-  }
-
 }

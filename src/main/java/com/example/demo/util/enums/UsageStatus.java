@@ -8,13 +8,15 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum Status {
+public enum UsageStatus {
 
-	ENABLE(1, "启用"), DISABLE(0, "禁用");
+	DISABLE(0, "禁用"),
+	ENABLE(1, "启用"),
+	LOCKED(2,"锁定");
 
 	@EnumValue
-	private Integer userStatus;
+	private int value;
 	@JsonValue
-	private String name;
+	private String desc;
 
 }

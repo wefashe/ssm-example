@@ -1,16 +1,24 @@
 <!doctype html>
 <html lang="zh">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
-<title>登陆</title>
+    <meta charset="UTF-8"/>
+    <title>登陆</title>
 </head>
 <body>
-	<form method="post" action="login">
-		<input type="text" name="userName" placeholder="用户名" value="admin" />
-		<input type="password" name="passWord" placeholder="密码" value="admin" />
-		<input type="text" name="captcha" placeholder="验证码" maxlength="4" value="1234"/> 
-		<input type="checkbox" name="rememberMe" checked/>&nbsp;&nbsp;记住我
-		<input type="submit" value="登陆" />
-	</form>
+<form method="post" action="login">
+
+    <div></div>
+    <input type="text" name="userName" placeholder="用户名" value="admin"/></div>
+    <div><input type="password" name="passWord" placeholder="密码" value="admin"/></div>
+
+    <div><label> 验证码 : <input type="text" name="captcha" placeholder="验证码" maxlength="4" value="1234"/> </label></div>
+
+    <div><img th:src="@{/render}" onclick="this.src='/render?'+Math.random()"></div>
+
+    <div><input type="checkbox" name="rememberMe" checked/>&nbsp;&nbsp;记住我</div>
+    <div><input type="submit" value="登陆"/></div>
+
+</form>
 </body>
 </html>

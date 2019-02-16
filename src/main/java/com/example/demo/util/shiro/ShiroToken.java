@@ -11,9 +11,12 @@ public class ShiroToken extends UsernamePasswordToken implements Serializable {
 
   private String passWorld;
 
-  public ShiroToken(String userName,String passWorld){
-    super(userName,passWorld);
+
+  public ShiroToken(String userName, String passWorld, boolean rememberMe) {
+    super(userName, passWorld, rememberMe);
     this.passWorld = passWorld;
   }
+
+
 
 }

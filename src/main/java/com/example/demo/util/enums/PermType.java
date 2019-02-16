@@ -10,10 +10,12 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum PermType {
 
-	MENU(1, "菜单"), BUTTON(2, "按钮"), OTHER(3, "其他");
+	MENU(1, "菜单"),
+	BUTTON(2, "按钮"),
+	OTHER(3, "其他");
 
 	@EnumValue
-	private Integer value;
+	private int value;
 	@JsonValue
 	private String name;
 

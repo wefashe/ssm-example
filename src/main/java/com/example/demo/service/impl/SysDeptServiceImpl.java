@@ -4,6 +4,7 @@ import com.example.demo.entity.SysDept;
 import com.example.demo.dao.ISysDeptDao;
 import com.example.demo.service.ISysDeptService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +17,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SysDeptServiceImpl extends ServiceImpl<ISysDeptDao, SysDept> implements ISysDeptService {
+
+  @Autowired
+  private ISysDeptDao deptDao;
 
 }

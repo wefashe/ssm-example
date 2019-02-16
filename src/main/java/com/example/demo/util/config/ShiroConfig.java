@@ -1,8 +1,6 @@
 package com.example.demo.util.config;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
+import com.example.demo.util.shiro.ShiroRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -11,13 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.example.demo.util.shiro.ShiroRealm;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
 
 	@Autowired
 	private CustomPropertis custom;
+
 
 	/**
 	 * 密码校验规则HashedCredentialsMatcher 这个类是为了对密码进行编码的 , 防止密码在数据库里明码保存 , 当然在登陆认证的时候 ,
@@ -41,19 +41,41 @@ public class ShiroConfig {
 		shiroRealm.setCredentialsMatcher(matcher);
 		return shiroRealm;
 	}
+//	@Bean
+//	public JwtRealm shiroRealm(HashedCredentialsMatcher matcher) {
+//		JwtRealm jwtRealm = new JwtRealm();
+//		jwtRealm.setAuthorizationCachingEnabled(false);
+//		jwtRealm.setCredentialsMatcher(matcher);
+//		return jwtRealm;
+//	}
 
 	@Bean
 	public SecurityManager securityManager(ShiroRealm shiroRealm) {
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 		securityManager.setRealm(shiroRealm);
+
+		//jwt不需要session,关闭默认的 Session 控制
+//		DefaultSessionStorageEvaluator evaluator = new DefaultSessionStorageEvaluator();
+//		evaluator.setSessionStorageEnabled(false);
+//		DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
+//		subjectDAO.setSessionStorageEvaluator(evaluator);
+//		securityManager.setSubjectDAO(subjectDAO);
+
 		return securityManager;
 	}
 
 	@Bean
 	public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+
+		//添加自定义过滤器
+//		Map<String, Filter> filterMap = new HashMap<>();
+//		filterMap.put("jwt", new JwtFilter());
+//		shiroFilterFactoryBean.setFilters(filterMap);
+
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 
+		//设置登录页面
 		shiroFilterFactoryBean.setLoginUrl(custom.getShiro().getLoginUrl());
 		shiroFilterFactoryBean.setSuccessUrl(custom.getShiro().getSuccessUrl());
 		shiroFilterFactoryBean.setUnauthorizedUrl(custom.getShiro().getUnauthorizedUrl());
@@ -63,6 +85,7 @@ public class ShiroConfig {
 		// 定义filterChain，静态资源不拦截
 		filterChainDefinitionMap.put("/guest/**", "anon");
 		filterChainDefinitionMap.put("/login", "anon");
+		filterChainDefinitionMap.put("/render", "anon");
 		filterChainDefinitionMap.put("/css/**", "anon");
 		filterChainDefinitionMap.put("/js/**", "anon");
 		filterChainDefinitionMap.put("/fonts/**", "anon");
@@ -75,10 +98,23 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/", "anon");
 		// 除上以外所有url都必须认证通过才可以访问，未通过认证自动访问LoginUrl
 		filterChainDefinitionMap.put("/**", "authc");
+//		filterChainDefinitionMap.put("/**", "jwt");
 
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return shiroFilterFactoryBean;
 	}
+
+//	@Bean
+//	public static DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator(){
+//		DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator=new DefaultAdvisorAutoProxyCreator();
+//		/**
+//		 * setUsePrefix(false)用于解决一个奇怪的bug。在引入spring aop的情况下。
+//		 * 在@Controller注解的类的方法中加入@RequiresRole等shiro注解，会导致该方法无法映射请求，导致返回404。
+//		 * 加入这项配置能解决这个bug
+//		 */
+//		defaultAdvisorAutoProxyCreator.setUsePrefix(true);
+//		return defaultAdvisorAutoProxyCreator;
+//	}
 
 	// @Bean
 	// public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {

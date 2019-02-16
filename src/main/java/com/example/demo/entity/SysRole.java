@@ -1,13 +1,11 @@
 package com.example.demo.entity;
 
-import java.io.Serializable;
-
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.example.demo.util.enums.Status;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -38,7 +36,7 @@ public class SysRole implements Serializable {
     /**
      * 角色状态 1-启用 0-停用
      */
-    private Status roleStatus;
+    private String roleStatus;
 
     /**
      * 创建时间

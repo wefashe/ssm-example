@@ -12,9 +12,8 @@ public class TokenManager {
     return token;
   }
 
-  public static SysUser login(String userName, String passWord, Boolean rememberMe) {
-    ShiroToken token = new ShiroToken(userName, passWord);
-    token.setRememberMe(rememberMe);
+  public static SysUser login(String userName, String passWord, boolean rememberMe) {
+    ShiroToken token = new ShiroToken(userName, passWord, rememberMe);
     Subject user = SecurityUtils.getSubject();
     user.login(token);
     return getToken();

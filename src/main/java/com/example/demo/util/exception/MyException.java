@@ -14,7 +14,7 @@ import lombok.Setter;
 public class MyException  extends RuntimeException{
   private static final long serialVersionUID = -6578894526492497688L;
 
-  private int errorCode;
+  private Integer errorCode;
 
   public MyException(MyExceptionEnums enums) {
     super(enums.getErrorMsg());

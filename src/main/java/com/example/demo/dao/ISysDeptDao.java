@@ -2,6 +2,7 @@ package com.example.demo.dao;
 
 import com.example.demo.entity.SysDept;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author wenfs
  * @since 2019-02-13
  */
+@Repository
 public interface ISysDeptDao extends BaseMapper<SysDept> {
 
 }

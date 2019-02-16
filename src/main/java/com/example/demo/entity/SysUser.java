@@ -1,12 +1,11 @@
 package com.example.demo.entity;
 
-import java.io.Serializable;
-
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.example.demo.util.enums.Status;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -53,7 +52,7 @@ public class SysUser implements Serializable {
      * 用户状态 1-启用 0-停用
      */
     
-    private Status userStatus;
+    private String userStatus;
 
     /**
      * 性别 0-女，1-男
