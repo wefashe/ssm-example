@@ -1,5 +1,6 @@
 package com.example.demo.util.config;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.example.demo.util.shiro.ShiroRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
@@ -18,6 +19,15 @@ public class ShiroConfig {
 	@Autowired
 	private CustomPropertis custom;
 
+
+	/**
+	 * thymeleaf中支持shiro标签
+	 * @return
+	 */
+	@Bean
+	public ShiroDialect shiroDialect() {
+		return new ShiroDialect();
+	}
 
 	/**
 	 * 密码校验规则HashedCredentialsMatcher 这个类是为了对密码进行编码的 , 防止密码在数据库里明码保存 , 当然在登陆认证的时候 ,
@@ -93,6 +103,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/static/**", "anon");
 		// druid数据源监控页面不拦截
 		filterChainDefinitionMap.put("/druid/**", "anon");
+		filterChainDefinitionMap.put("/swagger-ui.html", "anon");
 		// 配置退出过滤器，其中具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/logout", "logout");
 		filterChainDefinitionMap.put("/", "anon");

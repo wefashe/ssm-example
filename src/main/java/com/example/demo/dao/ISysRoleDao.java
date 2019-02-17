@@ -18,6 +18,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ISysRoleDao extends BaseMapper<SysRole> {
 
-	List<SysRole> findRoleIdByUserId(String userId);
+	List<SysRole> getRole(String userId);
 
 }

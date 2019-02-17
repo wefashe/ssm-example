@@ -62,7 +62,7 @@ public class SysPerm implements Serializable {
     /**
      * 权限类型 1-菜单  2-按钮  3-其他
      */
-    private PermType permType;
+    private Integer permType;
 
     /**
      * 操作人

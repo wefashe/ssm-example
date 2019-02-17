@@ -5,6 +5,7 @@ import com.example.demo.entity.SysPerm;
 import java.util.List;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -18,6 +19,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ISysPermDao extends BaseMapper<SysPerm> {
 
-	List<SysPerm> fingPermByUserId(String userId);
+	List<SysPerm> getPerm(@Param("userId")String userId,@Param("permName")String permName,@Param("permType")Integer permType);
 
 }

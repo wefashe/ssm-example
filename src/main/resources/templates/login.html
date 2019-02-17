@@ -1,27 +1,59 @@
 <!doctype html>
-<html lang="zh">
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="pragma" content="no-cache"/>
-    <meta http-equiv="cache-control" content="no-cache, must-revalidate"/>
-    <meta http-equiv="expires" content="0"/>
-    <title>登陆</title>
+    <meta charset="UTF-8"/>
+    <title>权限管理系统 - 登录</title>
+    <link rel="shortcut icon" href="../static/favicon.ico"/>
 </head>
 <body>
-<form method="post" action="login">
 
-    <div></div>
-    <input type="text" name="userName" placeholder="用户名" value="admin"/></div>
-    <div><input type="password" name="passWord" placeholder="密码" value="admin"/></div>
-
-    <div><label> 验证码 : <input type="text" name="captcha" placeholder="验证码" maxlength="4" value="1234"/> </label></div>
-
+<div id="login">
+    <div><input type="text" name="userName" id="userName" placeholder="用户名" value="admin"/></div>
+    <div><input type="password" name="passWord" id="passWord" placeholder="密码" value="admin"/></div>
+    <div><label> 验证码 : <input type="text" name="captcha" id="captcha" placeholder="验证码" maxlength="4"/> </label></div>
     <div><img th:src="@{/render}" onclick="this.src='/render?'+Math.random()"></div>
+    <div><input type="checkbox" name="rememberMe" id="rememberMe" checked/>&nbsp;&nbsp;记住我</div>
+    <div>
+        <button onclick="login()">登陆</button>
+    </div>
+</div>
+<div id="status" style="margin-top: 20px;">
+    <shiro:guest>您当前是游客，请登录</shiro:guest>
+    <shiro:authenticated>你已登录</shiro:authenticated>
+</div>
+<div id="errMsg" style="color: red;font-weight: bold;"></div>
 
-    <div><input type="checkbox" name="rememberMe" checked/>&nbsp;&nbsp;记住我</div>
-    <div><input type="submit" value="登陆"/></div>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script>
 
-</form>
+    function login() {
+        var params = {
+            userName: $("#userName").val().trim(),
+            passWord: $("#userName").val().trim(),
+            captcha: $("#captcha").val().trim(),
+            rememberMe: $("#rememberMe").val().trim()
+        };
+        $.ajax({
+            type: "post",
+            url: "/login",
+            data: params,
+            dataType: "json",
+            success: function (result) {
+                if (result.resultCode === 0) {
+                    parent.location.href = '/index';
+                } else {
+                    $("#errMsg").text(result.resultMsg);
+                }
+            },
+            error: function () {
+                $("#errMsg").text("登录失败");
+            }
+
+        });
+    };
+
+
+</script>
 </body>
 </html>

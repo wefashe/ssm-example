@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.baomidou.kaptcha.Kaptcha;
 import com.example.demo.entity.SysUser;
+import com.example.demo.service.ISysPermService;
 import com.example.demo.util.result.Result;
 import com.example.demo.util.shiro.TokenManager;
 import io.swagger.annotations.Api;
@@ -21,9 +22,11 @@ public class SysIndexController extends BaseController{
 
 	@Autowired
 	private Kaptcha kaptcha;
+	@Autowired
+	private ISysPermService permService;
 
 	@GetMapping("/")
-	public String redirectIndex() {
+	public String index() {
 		return "redirect:index";
 	}
 
@@ -31,6 +34,7 @@ public class SysIndexController extends BaseController{
 	public String index(Model model) {
 		SysUser user = TokenManager.getToken();
 		model.addAttribute("user", user);
+		model.addAttribute("menus",permService.getPerm(user.getUserId(),null,1));
 		return "index";
 	}
 

@@ -1,10 +1,13 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.SysPerm;
-import com.example.demo.dao.ISysPermDao;
-import com.example.demo.service.ISysPermService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.demo.dao.ISysPermDao;
+import com.example.demo.entity.SysPerm;
+import com.example.demo.service.ISysPermService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +20,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysPermServiceImpl extends ServiceImpl<ISysPermDao, SysPerm> implements ISysPermService {
 
+  @Autowired
+  private ISysPermDao permDao;
+
+  @Override
+  public List<SysPerm> getPerm(String userId, String permName, Integer permType) {
+    return permDao.getPerm(userId,permName,permType);
+  }
 }

@@ -44,7 +44,7 @@ public class ShiroRealm extends AuthorizingRealm {
     // 获取用户输入信息
     String userName = (String) authcToken.getPrincipal();
 
-    log.info("{}开始登录认证", authcToken.getPrincipal());
+    log.info("{}开始登录认证", userName);
     LambdaQueryWrapper<SysUser> lambda = new LambdaQueryWrapper<>();
     lambda.eq(SysUser::getUserName, userName);
     SysUser user = userDao.selectOne(lambda);
@@ -58,7 +58,7 @@ public class ShiroRealm extends AuthorizingRealm {
     }
     //更新登录时间
     userDao.updateById(new SysUser().setUserId(user.getUserId()).setLastLoginTime(System.currentTimeMillis() + ""));
-    log.info("{}登录认证通过", authcToken.getPrincipal());
+    log.info("{}登录认证通过", userName);
 
     //盐值  一般是用户名
     ByteSource credentialsSalt = ByteSource.Util.bytes(user.getPassSalt());
@@ -71,17 +71,18 @@ public class ShiroRealm extends AuthorizingRealm {
   @Override
   protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
     SysUser user = (SysUser) principals.getPrimaryPrincipal();
+    log.info("{}开始授予权限", user.getUserName());
     SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
     // 获取用户角色集
-    List<SysRole> roles = roleDao.findRoleIdByUserId(user.getUserId());
+    List<SysRole> roles = roleDao.getRole(user.getUserId());
     Set<String> roleSet = roles.stream().map(SysRole::getRoleId).collect(Collectors.toSet());
     simpleAuthorizationInfo.setRoles(roleSet);
-
+    log.info("{}角色为{}", user.getUserName(),roleSet);
     //获取用户权限集
-    List<SysPerm> perms = permDao.fingPermByUserId(user.getUserId());
+    List<SysPerm> perms = permDao.getPerm(user.getUserId(),null,null);
     Set<String> permSet = perms.stream().map(SysPerm::getPermId).collect(Collectors.toSet());
-
     simpleAuthorizationInfo.setStringPermissions(permSet);
+    log.info("{}权限有{}", user.getUserName(),permSet);
     return simpleAuthorizationInfo;
   }
 

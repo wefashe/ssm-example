@@ -84,12 +84,12 @@ public class JwtRealm extends AuthorizingRealm {
     SysUser user = (SysUser) principals.getPrimaryPrincipal();
     SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
     // 获取用户角色集
-    List<SysRole> roles = roleDao.findRoleIdByUserId(user.getUserId());
+    List<SysRole> roles = roleDao.getRole(user.getUserId());
     Set<String> roleSet = roles.stream().map(SysRole::getRoleId).collect(Collectors.toSet());
     simpleAuthorizationInfo.setRoles(roleSet);
 
     //获取用户权限集
-    List<SysPerm> perms = permDao.fingPermByUserId(user.getUserId());
+    List<SysPerm> perms = permDao.getPerm(user.getUserId(),null,null);
     Set<String> permSet = perms.stream().map(SysPerm::getPermId).collect(Collectors.toSet());
 
     simpleAuthorizationInfo.setStringPermissions(permSet);

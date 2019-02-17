@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 
 import io.swagger.annotations.Api;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,11 @@ import org.springframework.stereotype.Controller;
 @Controller
 @RequestMapping("role")
 public class SysRoleController {
+
+  @GetMapping("/")
+  public String index() {
+    return "system/role/role";
+  }
 
 }
 

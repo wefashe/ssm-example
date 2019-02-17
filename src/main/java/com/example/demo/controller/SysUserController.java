@@ -29,6 +29,11 @@ public class SysUserController {
 
 	@Autowired
 	private ISysUserService userService;
+
+	@GetMapping("/")
+	public String index() {
+		return "system/user/user";
+	}
 	
 	@GetMapping("register")
 	public String register() {

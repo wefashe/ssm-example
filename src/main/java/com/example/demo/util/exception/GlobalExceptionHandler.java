@@ -76,49 +76,6 @@ public class GlobalExceptionHandler  {
 	}
 
 
-	@ExceptionHandler(ValidationException.class)
-	@ResponseBody
-	public  Result validationExceptionHandler(ValidationException validationException) {
-		return  new Result(validationException);
-	}
-
-
-	@ExceptionHandler(MethodArgumentNotValidException.class)
-	@ResponseBody
-	public  Result servletExceptionHandler(MethodArgumentNotValidException methodArgumentNotValidException) {
-
-		BindingResult result = methodArgumentNotValidException.getBindingResult();
-		if (result.hasErrors()) {
-
-			List<ObjectError> errors = result.getAllErrors();
-
-			errors.forEach(p ->{
-
-				FieldError fieldError = (FieldError) p;
-				log.error("Data check failure : object{"+fieldError.getObjectName()+"},field{"+fieldError.getField()+
-					"},errorMessage{"+fieldError.getDefaultMessage()+"}");
-
-			});
-
-		}
-
-
-
-		return  new Result(methodArgumentNotValidException);
-	}
-
-
-	@ExceptionHandler(value =BindException.class)
-	@ResponseBody
-	public Result handleBindException(BindException e) throws BindException {
-		// ex.getFieldError():随机返回一个对象属性的异常信息。如果要一次性返回所有对象属性异常信息，则调用ex.getAllErrors()
-		FieldError fieldError = e.getFieldError();
-		StringBuilder sb = new StringBuilder();
-		sb.append(fieldError.getField()).append("=[").append(fieldError.getRejectedValue()).append("]")
-			.append(fieldError.getDefaultMessage());
-		return new Result();
-	}
-
 
 	@ExceptionHandler(ServletException.class)
 	@ResponseBody

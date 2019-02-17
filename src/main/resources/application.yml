@@ -11,9 +11,6 @@ spring:
       username: root
       password: root
       test-while-idle: false
-  devtools:
-    restart:
-      additional-paths: src/main/java
   thymeleaf:
     cache: false
   mvc:
