@@ -40,7 +40,7 @@ public class SysUserController {
 		return null;
 	}
 
-	@ApiOperation(value="添加用户value")
+	@ApiOperation(value = "注册")
 	@PostMapping("register")
 	public Result register( SysUser user) {
 

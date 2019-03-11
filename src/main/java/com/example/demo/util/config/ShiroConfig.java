@@ -100,6 +100,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/js/**", "anon");
 		filterChainDefinitionMap.put("/fonts/**", "anon");
 		filterChainDefinitionMap.put("/img/**", "anon");
+		filterChainDefinitionMap.put("/lib/**", "anon");
 		filterChainDefinitionMap.put("/static/**", "anon");
 		// druid数据源监控页面不拦截
 		filterChainDefinitionMap.put("/druid/**", "anon");
