@@ -2,9 +2,12 @@ package com.example.demo.controller;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -14,6 +17,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.example.demo.entity.SysUser;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class SysUserControllerTest {
 	
 	@Autowired
@@ -36,16 +41,16 @@ public class SysUserControllerTest {
 	public void test() throws Exception {
 //		String json="",参数
 		
-		 mvc.perform(MockMvcRequestBuilders.get("/learn/resource/1001")
-	                .contentType(MediaType.APPLICATION_JSON_UTF8)
-	                .accept(MediaType.APPLICATION_JSON_UTF8)
-//	                .content(json.getBytes())传参
-	                .session(session)
-	        )
-	       .andExpect(MockMvcResultMatchers.status().isOk())
-	       .andExpect(MockMvcResultMatchers.jsonPath("$.author").value("嘟嘟MD独立博客"))
-	       .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Spring Boot干货系列"))
-	       .andDo(MockMvcResultHandlers.print());
+//		 mvc.perform(MockMvcRequestBuilders.get("/learn/resource/1001")
+//	                .contentType(MediaType.APPLICATION_JSON_UTF8)
+//	                .accept(MediaType.APPLICATION_JSON_UTF8)
+////	                .content(json.getBytes())传参
+//	                .session(session)
+//	        )
+//	       .andExpect(MockMvcResultMatchers.status().isOk())
+//	       .andExpect(MockMvcResultMatchers.jsonPath("$.author").value("嘟嘟MD独立博客"))
+//	       .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Spring Boot干货系列"))
+//	       .andDo(MockMvcResultHandlers.print());
 	}
 	
 
