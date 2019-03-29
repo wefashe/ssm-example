@@ -104,6 +104,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/static/**", "anon");
 		// druid数据源监控页面不拦截
 		filterChainDefinitionMap.put("/druid/**", "anon");
+		filterChainDefinitionMap.put("/h2/**", "anon");
 		filterChainDefinitionMap.put("/swagger-ui.html", "anon");
 		// 配置退出过滤器，其中具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/logout", "logout");
