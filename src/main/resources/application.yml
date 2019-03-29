@@ -16,7 +16,7 @@ spring:
     sql-script-encoding: UTF-8
     initialization-mode: embedded
     druid:
-      url: jdbc:log4jdbc:h2:./h2/test;auto_server=true;
+      url: jdbc:log4jdbc:h2:./db/ssm-example;auto_server=true;
       driver-class-name: net.sf.log4jdbc.DriverSpy
       username: test
       password: 1
