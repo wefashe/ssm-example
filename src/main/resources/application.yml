@@ -4,17 +4,27 @@ server:
     context-path: /
 
 spring:
+  h2:
+    console:
+      path: /h2
+      enabled: true
+      settings:
+        web-allow-others: true
   datasource:
-    schema: classpath:datasource/schema.sql
-    data: classpath:datasource/data.sql
+    schema: classpath:script/DDL.sql
+    data: classpath:script/DML.sql
     sql-script-encoding: UTF-8
     initialization-mode: embedded
-    druid:
-      driver-class-name: net.sf.log4jdbc.DriverSpy
-      url: jdbc:log4jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8
-      username: root
-      password: root
-      test-while-idle: false
+    url: jdbc:log4jdbc:h2:~/h2/ssm;auto_server=true;
+    driver-class-name: net.sf.log4jdbc.DriverSpy
+    username: ssm
+    password: 123456
+#    druid:
+#      driver-class-name: net.sf.log4jdbc.DriverSpy
+#      url: jdbc:log4jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8
+#      username: root
+#      password: root
+#      test-while-idle: false
   thymeleaf:
     cache: false
   mvc:
