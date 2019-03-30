@@ -11,12 +11,44 @@ layui.use(['form','layer','jquery'],function(){
 
     //登录按钮
     form.on("submit(login)",function(data){
-        $(this).text("登录中...").attr("disabled","disabled").addClass("layui-disabled");
-        setTimeout(function(){
-            window.location.href = "/index";
-        },1000);
-        return false;
-    })
+//         $(this).text("登录中...").attr("disabled","disabled").addClass("layui-disabled");
+//         setTimeout(function(){
+
+        // },1000);
+		var loginBtn =  $(this);
+		var isDisabled = loginBtn.hasClass('layui-disabled');
+		if (isDisabled) {
+			return false;
+		}
+		
+		$.ajax({
+			type: "post",
+			url: "/login",
+			dataType: "json",
+// 			data: JSON.stringify(data.field),
+			data: data.field,
+			beforeSend: function () {
+				loginBtn.text("登录中...").attr("disabled","disabled").addClass('layui-disabled');
+			},
+			complete: function () {
+				loginBtn.text("登录").attr("disabled","enabled").removeClass('layui-disabled');
+			},
+			success: function (result) {
+			   if (result.resultCode === 0) {
+					parent.location.href = '/index';
+	//				window.location.href = "/index";
+			   } else {
+					layer.msg(result.resultMsg);
+				}
+			},
+			error: function() {
+				layer.msg("登录失败!");
+			}
+		});
+	
+		return false;
+    
+	})
 
     //表单输入效果
     $(".loginBody .input-item").click(function(e){
