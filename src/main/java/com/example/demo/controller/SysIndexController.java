@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.util.enums.MyExceptionEnums;
+import com.example.demo.util.exception.MyException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,8 +51,26 @@ public class SysIndexController extends BaseController {
 	@PostMapping("login")
 	@ResponseBody
 	public Result login(String userName, String passWord, String captcha, boolean rememberMe) {
-		kaptcha.validate(captcha, 60);
-		SysUser user = TokenManager.login(userName, passWord, rememberMe);
+		if(StringUtils.isBlank(userName)){
+			throw new MyException(MyExceptionEnums.USERNAME_EMPTY);
+		}
+//		if (userName.length()<6||userName.length()>11){
+//			throw new MyException(MyExceptionEnums.USERNAME_NUM_ERROR);
+//		}
+		if (StringUtils.isBlank(passWord)){
+			throw new MyException(MyExceptionEnums.PASSWORD_EMPTY);
+		}
+//		if (passWord.length()<11||passWord.length()>20){
+//			throw new MyException(MyExceptionEnums.PASSWORD_NUM_ERROR);
+//		}
+		if (StringUtils.isBlank(captcha)){
+			throw new MyException(MyExceptionEnums.KAPTCHA_EMPTY);
+		}
+		if (captcha.length()!=4){
+			throw new MyException(MyExceptionEnums.KAPTCHA_NUM_FOUR);
+		}
+		kaptcha.validate(captcha.trim(), 60);
+		SysUser user = TokenManager.login(userName.trim(), passWord.trim(), rememberMe);
 		return new Result(user);
 	}
 

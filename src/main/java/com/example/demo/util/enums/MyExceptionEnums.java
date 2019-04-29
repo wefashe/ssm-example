@@ -21,11 +21,16 @@ public enum MyExceptionEnums {
 	USERNAME_EMPTY(104, "用户名为空"),
 	PASSWORD_ERROR(105, "密码错误"),
 	PASSWORD_EMPTY(106, "密码为空"),
+	USERNAME_NUM_ERROR(107, "用户名个数为6到11位之间"),
+	PASSWORD_NUM_ERROR(108, "密码个数为11到20位之间"),
+
 	//验证码
 	KAPTCHA_RENDERFAIL(2101,"验证码渲染失败"),
 	KAPTCHA_NOTFOUND(2102,"验证码未找到"),
 	KAPTCHA_INCORRECT(2103, "验证码不正确"),
 	KAPTCHA_TIMEOUT(2104, "验证码过期"),
+	KAPTCHA_EMPTY(2105, "验证码为空"),
+	KAPTCHA_NUM_FOUR(2016,"验证码必须4位"),
 
 	//登录
 	NOT_LOGIN(201,"未登录"),

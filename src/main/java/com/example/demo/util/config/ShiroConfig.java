@@ -33,24 +33,32 @@ public class ShiroConfig {
 	 * 密码校验规则HashedCredentialsMatcher 这个类是为了对密码进行编码的 , 防止密码在数据库里明码保存 , 当然在登陆认证的时候 ,
 	 * 这个类也负责对form里输入的密码进行编码 处理认证匹配处理器：如果自定义需要实现继承HashedCredentialsMatcher
 	 */
-	@Bean
-	public HashedCredentialsMatcher hashedCredentialsMatcher() {
-		HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
-		// 指定加密方式为MD5
-		credentialsMatcher.setHashAlgorithmName("MD5");
-		// 加密次数
-		credentialsMatcher.setHashIterations(1024);
-		credentialsMatcher.setStoredCredentialsHexEncoded(true);
-		return credentialsMatcher;
-	}
+//	@Bean
+//	public HashedCredentialsMatcher hashedCredentialsMatcher() {
+//		HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
+//		// 指定加密方式为MD5
+//		credentialsMatcher.setHashAlgorithmName("MD5");
+//		// 加密次数
+//		credentialsMatcher.setHashIterations(1024);
+//		credentialsMatcher.setStoredCredentialsHexEncoded(true);
+//		return credentialsMatcher;
+//	}
+//
+//	@Bean
+//	public ShiroRealm shiroRealm(HashedCredentialsMatcher matcher) {
+//		ShiroRealm shiroRealm = new ShiroRealm();
+//		shiroRealm.setAuthorizationCachingEnabled(false);
+//		shiroRealm.setCredentialsMatcher(matcher);
+//		return shiroRealm;
+//	}
 
 	@Bean
-	public ShiroRealm shiroRealm(HashedCredentialsMatcher matcher) {
+	public ShiroRealm shiroRealm() {
 		ShiroRealm shiroRealm = new ShiroRealm();
 		shiroRealm.setAuthorizationCachingEnabled(false);
-		shiroRealm.setCredentialsMatcher(matcher);
 		return shiroRealm;
 	}
+
 //	@Bean
 //	public JwtRealm shiroRealm(HashedCredentialsMatcher matcher) {
 //		JwtRealm jwtRealm = new JwtRealm();

@@ -18,7 +18,7 @@ spring:
     druid:
       url: jdbc:log4jdbc:h2:~/db/ssm-example;auto_server=true;
       driver-class-name: net.sf.log4jdbc.DriverSpy
-      username: test
+      username: ssm
       password: 1
       test-while-idle: false
   thymeleaf:

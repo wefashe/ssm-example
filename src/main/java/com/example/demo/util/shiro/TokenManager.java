@@ -1,10 +1,15 @@
 package com.example.demo.util.shiro;
 
+import com.example.demo.util.enums.MyExceptionEnums;
+import com.example.demo.util.exception.MyException;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
 import com.example.demo.entity.SysUser;
 
+@Slf4j
 public class TokenManager {
 
   public static SysUser getToken() {
@@ -14,8 +19,13 @@ public class TokenManager {
 
   public static SysUser login(String userName, String passWord, boolean rememberMe) {
     ShiroToken token = new ShiroToken(userName, passWord, rememberMe);
-    Subject user = SecurityUtils.getSubject();
-    user.login(token);
+    Subject currentUser = SecurityUtils.getSubject();
+    currentUser.login(token);
+    //验证是否登录成功
+    if (currentUser.isAuthenticated()){
+      log.debug("用户【"+userName+"】登陆成功！");
+      //这里可以进行一些认证通过后的一些系统参数初始化操作
+    }
     return getToken();
   }
 

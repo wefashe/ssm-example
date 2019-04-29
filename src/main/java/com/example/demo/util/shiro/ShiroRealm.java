@@ -44,7 +44,6 @@ public class ShiroRealm extends AuthorizingRealm {
     // 获取用户输入信息
     String userName = (String) authcToken.getPrincipal();
 
-    log.info("{}开始登录认证", userName);
     LambdaQueryWrapper<SysUser> lambda = new LambdaQueryWrapper<>();
     lambda.eq(SysUser::getUserName, userName);
     SysUser user = userDao.selectOne(lambda);
@@ -58,7 +57,6 @@ public class ShiroRealm extends AuthorizingRealm {
     }
     //更新登录时间
     userDao.updateById(new SysUser().setUserId(user.getUserId()).setLastLoginTime(System.currentTimeMillis() + ""));
-    log.info("{}登录认证通过", userName);
 
     //盐值  一般是用户名
     ByteSource credentialsSalt = ByteSource.Util.bytes(user.getPassSalt());

@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import com.example.demo.util.result.Result;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * <p>
@@ -42,9 +45,10 @@ public class SysUserController {
 		return null;
 	}
 
-	@ApiOperation(value = "注册")
-	@PostMapping("register")
-	public Result register(SysUser user) {
+	@ApiOperation(value = "添加用户")
+	@PostMapping("add")
+  @ResponseBody
+	public Result save(SysUser user) {
 
 		LambdaQueryWrapper<SysUser> lambda = new LambdaQueryWrapper();
 		lambda.eq(SysUser::getUserName, user.getUserName());
@@ -64,4 +68,30 @@ public class SysUserController {
 		return new Result();
 	}
 
+	@ApiOperation(value = "获取用户")
+	@GetMapping("get")
+	@ResponseBody
+	public Result get(String userId) {
+
+		LambdaQueryWrapper<SysUser> lambda = new LambdaQueryWrapper();
+		lambda.eq(SysUser::getUserId, userId);
+		SysUser user = userService.getOne(lambda);
+		return new Result(user);
+	}
+
+	@ApiOperation(value = "获取用户列表")
+	@GetMapping("getList")
+	@ResponseBody
+	public Result getList() {
+		List<SysUser> users = userService.list();
+		return new Result(users);
+	}
+
+	@ApiOperation(value = "删除用户")
+	@PostMapping("del")
+	@ResponseBody
+	public Result del(List<String> userIds) {
+		userService.removeByIds(userIds);
+		return new Result();
+	}
 }
