@@ -20,8 +20,7 @@
       <!-- org.apache.log4j.WriterAppender(将日志信息以流格式发送到任意指定的地方)   -->
 <!-- ========================================================================== -->
 
-	<include
-		resource="org/springframework/boot/logging/logback/base.xml" />
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
 
 	<logger name="jdbc" additivity="false" level="OFF" />
 	<logger name="jdbc.sqlonly" additivity="false" level="INFO">
