@@ -1,93 +1,109 @@
 <!DOCTYPE html>
-<html
-  lang="zh_CN"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
->
-  <head>
-    <meta charset="UTF-8" />
-    <title>权限管理系统 - 首页</title>
-    <link rel="shortcut icon" href="../static/img/favicon.ico" />
-    <link rel="stylesheet" href="../static/lib/layui/css/layui.css" />
-    <link rel="stylesheet" href="../static/css/index.css" />
-  </head>
-  <body class="layui-layout-body">
-    <div class="layui-layout layui-layout-admin">
-      <!--顶部区域开始-->
-      <div class="layui-header">
-        <div class="layui-logo">layui 后台布局</div>
-        <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left">
-          <li class="layui-nav-item left-open">
-            <i
-              title="展开左侧栏"
-              class="layui-icon layui-icon-shrink-right"
-            ></i>
-          </li>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 
-          <li class="layui-nav-item"><a href="">控制台</a></li>
-        </ul>
-        <ul class="layui-nav layui-layout-right">
-          <li class="layui-nav-item">
-            <a href="javascript:;">
-              <img src="http://t.cn/RCzsdCq" class="layui-nav-img" />
-              贤心
+<head>
+  <meta charset="UTF-8" />
+  <title>权限管理系统 - 首页</title>
+  <link rel="shortcut icon" href="../static/img/favicon.ico" />
+  <link rel="stylesheet" href="../static/lib/layui/css/layui.css" />
+  <link rel="stylesheet" href="../static/css/index.css" />
+</head>
+
+<body class="layui-layout-body">
+  <div class="layui-layout layui-layout-admin">
+    <!--顶部区域开始-->
+    <div class="layui-header">
+      <div class="layui-logo">layui 后台布局</div>
+      <!-- 头部区域（可配合layui已有的水平导航） -->
+      <ul class="layui-nav layui-layout-left">
+        <li class="layui-nav-item left-open">
+          <i title="展开左侧栏" class="layui-icon layui-icon-shrink-right"></i>
+        </li>
+
+        <li class="layui-nav-item"><a href="">控制台</a></li>
+      </ul>
+      <ul class="layui-nav layui-layout-right">
+        <li class="layui-nav-item">
+          <a href="javascript:;">
+            <img src="http://t.cn/RCzsdCq" class="layui-nav-img" />
+            贤心
+          </a>
+          <dl class="layui-nav-child">
+            <dd><a href="">基本资料</a></dd>
+            <dd><a href="">安全设置</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item"><a href="">退了</a></li>
+      </ul>
+    </div>
+    <!--顶部区域结束-->
+
+    <!--左侧区域开始-->
+    <div class="layui-side layui-bg-black">
+      <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+          <li class="layui-nav-item layui-nav-itemed">
+            <a class="" href="javascript:;">
+              <i class="layui-icon layui-icon-shrink-right"></i> 所有商品
             </a>
             <dl class="layui-nav-child">
-              <dd><a href="">基本资料</a></dd>
-              <dd><a href="">安全设置</a></dd>
+              <dd><a href="javascript:;"> <i class="layui-icon layui-icon-shrink-right"></i> 列表一</a></dd>
+              <dd><a href="javascript:;">列表二</a></dd>
+              <dd><a href="javascript:;">列表三</a></dd>
+              <dd><a href="">超链接</a></dd>
             </dl>
           </li>
-          <li class="layui-nav-item"><a href="">退了</a></li>
+          <li class="layui-nav-item">
+            <a href="javascript:;">解决方案</a>
+            <dl class="layui-nav-child">
+              <dd><a href="javascript:;">列表一</a></dd>
+              <dd><a href="javascript:;">列表二</a></dd>
+              <dd><a href="">超链接</a></dd>
+            </dl>
+          </li>
+          <li class="layui-nav-item"><a href="">云市场</a></li>
+          <li class="layui-nav-item"><a href="">发布商品</a></li>
         </ul>
       </div>
-      <!--顶部区域结束-->
+    </div>
+    <!--左侧区域结束-->
 
-      <!--左侧区域开始-->
-      <div class="layui-side layui-bg-black">
-        <div class="layui-side-scroll">
-          <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-          <ul class="layui-nav layui-nav-tree" lay-filter="test">
-            <li class="layui-nav-item layui-nav-itemed">
-              <a class="" href="javascript:;">所有商品</a>
-              <dl class="layui-nav-child">
-                <dd><a href="javascript:;">列表一</a></dd>
-                <dd><a href="javascript:;">列表二</a></dd>
-                <dd><a href="javascript:;">列表三</a></dd>
-                <dd><a href="">超链接</a></dd>
-              </dl>
+    <!--右侧区域开始-->
+    <div class="layui-body">
+      <!-- 页面标签 -->
+      <div class="layui-new-tab">
+        <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftTab"></div>
+        <div class="layui-tab" lay-unauto="" lay-allowclose="true" lay-filter="layadmin-layout-tabs">
+          <ul class="layui-tab-title">
+            <li lay-id="home/console.html" lay-attr="home/console.html" class="layui-this">
+              <i class="layui-icon layui-icon-home"></i><i class="layui-icon layui-unselect layui-tab-close"></i>
             </li>
-            <li class="layui-nav-item">
-              <a href="javascript:;">解决方案</a>
-              <dl class="layui-nav-child">
-                <dd><a href="javascript:;">列表一</a></dd>
-                <dd><a href="javascript:;">列表二</a></dd>
-                <dd><a href="">超链接</a></dd>
-              </dl>
+            <li>
+              <i class="layui-icon layui-icon-home"></i><i class="layui-icon layui-unselect layui-tab-close"></i>用户基本管理
             </li>
-            <li class="layui-nav-item"><a href="">云市场</a></li>
-            <li class="layui-nav-item"><a href="">发布商品</a></li>
+            <li>权限分配</li>
+            <li>全部历史商品管理文字长一点试试</li>
+            <li>订单管理</li>
           </ul>
         </div>
+        <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightTab"></div>
       </div>
-      <!--左侧区域结束-->
-
-      <!--右侧区域开始-->
-      <div class="layui-body">
-        <!-- 内容主体区域 -->
-        <div style="padding: 15px;">内容主体区域</div>
-      </div>
-      <!--右侧区域结束-->
-
-      <!--底部区域开始-->
-      <div class="layui-footer">
-        <!-- 底部固定区域 -->
-        © layui.com - 底部固定区域
-      </div>
-      <!--底部区域结束-->
+      <!-- 内容主体区域 -->
+      <!-- <div style="padding: 15px;">内容主体区域</div> -->
     </div>
+    <!--右侧区域结束-->
 
-    <script type="text/javascript" src="../static/lib/layui/layui.js"></script>
-    <script type="text/javascript" src="../static/js/index.js"></script>
-  </body>
+    <!--底部区域开始-->
+    <div class="layui-footer">
+      <!-- 底部固定区域 -->
+      © layui.com - 底部固定区域
+    </div>
+    <!--底部区域结束-->
+  </div>
+
+  <script type="text/javascript" src="../static/lib/layui/layui.js"></script>
+  <script type="text/javascript" src="../static/js/index.js"></script>
+</body>
+
 </html>
