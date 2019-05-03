@@ -1,0 +1,124 @@
+{
+      "errorCode": "1",
+      "data": [
+            {
+                  "permId": "4",
+                  "parId": "1",
+                  "permName": "大家电",
+                  "permUrl": "/test.html",
+                  "permIcon": "layui-icon-vercode"
+            },
+            {
+                  "permId": "5",
+                  "parId": "1",
+                  "permName": "生活电器",
+                  "permUrl": "/test.html",
+                  "permIcon": "layui-icon-vercode"
+            },
+            {
+                  "permId": "1",
+                  "parId": "0",
+                  "permName": "家用电器",
+                  "permUrl": "/test.html",
+                  "permIcon": "layui-icon-vercode"
+            },
+            {
+                  "permId": "2",
+                  "parId": "0",
+                  "permName": "服饰",
+                  "permUrl": "/test.html",
+                  "permIcon": "layui-icon-vercode"
+            },
+            {
+                  "permId": "3",
+                  "parId": "0",
+                  "permName": "化妆",
+                  "permUrl": "/test.html",
+                  "permIcon": "layui-icon-vercode"
+            },
+            {
+                  "permId": "7",
+                  "parId": "4",
+                  "permName": "空调",
+                  "permUrl": "/test.html",
+                  "permIcon": "layui-icon-vercode"
+            },
+            {
+                  "permId": "8",
+                  "parId": "4",
+                  "permName": "冰箱",
+                  "permUrl": "/test.html",
+                  "permIcon": "layui-icon-vercode"
+            },
+            {
+                  "permId": "9",
+                  "parId": "4",
+                  "permName": "洗衣机",
+                  "permUrl": "/test.html",
+                  "permIcon": "layui-icon-vercode"
+            },
+            {
+                  "permId": "10",
+                  "parId": "4",
+                  "permName": "热水器",
+                  "permUrl": "/test.html",
+                  "permIcon": "layui-icon-vercode"
+            },
+            {
+                  "permId": "11",
+                  "parId": "3",
+                  "permName": "面部护理",
+                  "permUrl": "/test.html",
+                  "permIcon": "layui-icon-vercode"
+            },
+            {
+                  "permId": "12",
+                  "parId": "3",
+                  "permName": "口腔护理",
+                  "permUrl": "/test.html",
+                  "permIcon": "layui-icon-vercode"
+            },
+            {
+                  "permId": "13",
+                  "parId": "2",
+                  "permName": "男装",
+                  "permUrl": "/test.html",
+                  "permIcon": "layui-icon-vercode"
+            },
+            {
+                  "permId": "14",
+                  "parId": "2",
+                  "permName": "女装",
+                  "permUrl": "/test.html",
+                  "permIcon": "layui-icon-vercode"
+            },
+            {
+                  "permId": "15",
+                  "parId": "7",
+                  "permName": "海尔空调",
+                  "permUrl": "/test.html",
+                  "permIcon": "layui-icon-vercode"
+            },
+            {
+                  "permId": "16",
+                  "parId": "7",
+                  "permName": "美的空调",
+                  "permUrl": "/test.html",
+                  "permIcon": "layui-icon-vercode"
+            },
+            {
+                  "permId": "19",
+                  "parId": "5",
+                  "permName": "加湿器",
+                  "permUrl": "/test.html",
+                  "permIcon": "layui-icon-vercode"
+            },
+            {
+                  "permId": "20",
+                  "parId": "5",
+                  "permName": "电熨斗",
+                  "permUrl": "/test.html",
+                  "permIcon": "layui-icon-vercode"
+            }
+      ]
+}
